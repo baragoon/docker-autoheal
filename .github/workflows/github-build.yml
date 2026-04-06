@@ -1,7 +1,7 @@
 name: build
 
 on:
-  workflow_dispatch: # allows the workflow to be run manually when desired
+  workflow_dispatch:
     branches:
       - main
 #  push:
