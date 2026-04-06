@@ -1,13 +1,16 @@
 name: build
 
 on:
-  push:
+  workflow_dispatch: # allows the workflow to be run manually when desired
     branches:
       - main
-    tags:
-      - '*'
-  schedule:
-    - cron: '0 0 * * *'
+#  push:
+#    branches:
+#      - main
+#    tags:
+#      - '*'
+#  schedule:
+#    - cron: '0 0 * * *'
 
 jobs:
   multi:
