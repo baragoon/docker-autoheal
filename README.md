@@ -5,12 +5,12 @@ This functionality was proposed to be included with the addition of `HEALTHCHECK
 This container is a stand-in till there is native support for `--exit-on-unhealthy` https://github.com/docker/docker/pull/22719.
 
 ## Supported tags and Dockerfile links
-- [`latest` (*Dockerfile*)](https://github.com/willfarrell/docker-autoheal/blob/main/Dockerfile) - Built daily
-- [`1.1.0` (*Dockerfile*)](https://github.com/willfarrell/docker-autoheal/blob/1.1.0/Dockerfile)
-- [`v0.7.0` (*Dockerfile*)](https://github.com/willfarrell/docker-autoheal/blob/v0.7.0/Dockerfile)
+- [`latest` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/main/Dockerfile)
+- [`1.2.1` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.1.0/Dockerfile)
+- [`v0.7.0` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/v0.7.0/Dockerfile)
 
 
-![](https://img.shields.io/docker/pulls/willfarrell/autoheal "Total docker pulls") [![](https://images.microbadger.com/badges/image/willfarrell/autoheal.svg)](http://microbadger.com/images/willfarrell/autoheal "Docker layer breakdown")
+![](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls") [![](https://images.microbadger.com/badges/image/baragoon/autoheal.svg)](http://microbadger.com/images/baragoon/autoheal "Docker layer breakdown")
 
 ## How to use
 
@@ -22,7 +22,7 @@ docker run -d \
     --restart=always \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    willfarrell/autoheal
+    baragoon/autoheal
 ```
 #### TCP socket 
 ```bash
@@ -32,7 +32,7 @@ docker run -d \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -e DOCKER_SOCK=tcp://$HOST:$PORT \
     -v /path/to/certs/:/certs/:ro \
-    willfarrell/autoheal
+    baragoon/autoheal
 ```
 #### TCP with mTLS (HTTPS)
 ```bash
@@ -47,7 +47,7 @@ docker run -d \
     -e DOCKER_SOCK=tcps://$HOST:2376 \
     -e DOCKER_TLS_VERIFY=1 \
     -v /path/to/certs/:/certs/:ro \
-    willfarrell/autoheal
+    baragoon/autoheal
 ```
 The certificates and keys need these names and resides under /certs inside the container:
 * ca.pem
@@ -87,7 +87,7 @@ services:
       replicas: 1
     environment:
       AUTOHEAL_CONTAINER_LABEL: autoheal-app
-    image: willfarrell/autoheal:latest
+    image: baragoon/autoheal:latest
     network_mode: none
     restart: always
     volumes:
