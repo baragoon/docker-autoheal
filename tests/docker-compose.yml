@@ -68,6 +68,7 @@ services:
     environment:
       AUTOHEAL_CONTAINER_LABEL: "${AUTOHEAL_CONTAINER_LABEL:-all}"
       AUTOHEAL_INTERVAL: "10"
+      AUTOHEAL_RESTART_STOPPED_CONTAINERS: "true"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     network_mode: none

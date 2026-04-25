@@ -77,8 +77,8 @@ docker run ... -v /etc/localtime:/etc/localtime:ro
 Choose one of the three alternatives:
 
 1. Apply the label `autoheal=true` to your container to have it watched.
-2. Set ENV `AUTOHEAL_CONTAINER_LABEL=all` to watch all running containers.
-3. Set ENV `AUTOHEAL_CONTAINER_LABEL` to existing container label that has the value `true`.
+2. Set ENV `AUTOHEAL_CONTAINER_LABEL=all` to watch all containers, including stopped/exited or crashed containers.
+3. Set ENV `AUTOHEAL_CONTAINER_LABEL` to an existing container label name to watch only containers where that label is set to `true` (use this instead of `all` to opt out of watching every container).
 
 > Note: `HEALTHCHECK` is required if you want autoheal to restart unhealthy containers.
 >
@@ -118,7 +118,8 @@ services:
 - `AUTOHEAL_INTERVAL=5`: Check every 5 seconds.
 - `AUTOHEAL_START_PERIOD=0`: Wait 0 seconds before first health check.
 - `AUTOHEAL_DEFAULT_STOP_TIMEOUT=10`: Docker waits max 10 seconds (the Docker default) for a container to stop before killing during restarts (container overridable via label, see above).
-- `AUTOHEAL_ONLY_MONITOR_RUNNING=false`: All containers monitored by default. Set this to true to only monitor running containers. This disables restarts for stopped/crashed containers and ignores paused containers.
+- `AUTOHEAL_ONLY_MONITOR_RUNNING=false`: When set to `true`, only running containers are monitored for unhealthy status (paused and exited containers are ignored in health checks).
+- `AUTOHEAL_RESTART_STOPPED_CONTAINERS=false`: Set to `true` to enable automatic restart of stopped/crashed containers. Only containers matching `AUTOHEAL_CONTAINER_LABEL` are restarted (requires explicit opt-in to avoid accidentally restarting intentionally stopped containers).
 - `DOCKER_SOCK=/var/run/docker.sock`: Unix socket for curl requests to Docker API.
 - `CURL_TIMEOUT=30`: --max-time seconds for curl requests to Docker API.
 - `WEBHOOK_URL=""`: Post message to the webhook if a container was restarted (or restart failed).
