@@ -10,6 +10,7 @@ This container is a stand-in till there is native support for [`--exit-on-unheal
 - [`1.2.2` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.2/Dockerfile)
 
 ![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls")
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/baragoon/docker-autoheal/.github%2Fworkflows%2Fgithub-build.yml)
 
 ## How to use
 
