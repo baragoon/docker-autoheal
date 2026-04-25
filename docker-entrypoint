@@ -48,7 +48,8 @@ docker_curl() {
 get_container_info() {
   local label_filter
   local running_filter
-  local url
+  local unhealthy_url
+  local exited_url
 
   # Set container selector
   if [ "$AUTOHEAL_CONTAINER_LABEL" = "all" ]
@@ -63,8 +64,17 @@ get_container_info() {
   else
     running_filter=",\"status\":\[\"running\"\]"
   fi
-  url="${HTTP_ENDPOINT}/containers/json?filters=\{\"health\":\[\"unhealthy\"\]${label_filter}${running_filter}\}"
-  docker_curl "$url"
+
+  unhealthy_url="${HTTP_ENDPOINT}/containers/json?filters=\{\"health\":\[\"unhealthy\"\]${label_filter}${running_filter}\}"
+
+  if [ "$AUTOHEAL_ONLY_MONITOR_RUNNING" = false ]
+  then
+    exited_url="${HTTP_ENDPOINT}/containers/json?all=1&filters=\{\"status\":\[\"exited\"\]${label_filter}\}"
+    # Merge unhealthy and exited lists and dedupe by container id.
+    printf '%s\n%s\n' "$(docker_curl "$unhealthy_url")" "$(docker_curl "$exited_url")" | jq -s 'add | unique_by(.Id)'
+  else
+    docker_curl "$unhealthy_url"
+  fi
 }
 
 # shellcheck disable=2039
@@ -160,13 +170,20 @@ then
       then
         echo "$DATE Container $CONTAINER_NAME (${CONTAINER_SHORT_ID}) found to be restarting - don't restart"
       else
-        echo "$DATE Container $CONTAINER_NAME (${CONTAINER_SHORT_ID}) found to be unhealthy - Restarting container now with ${TIMEOUT}s timeout"
+        if [ "$CONTAINER_STATE" = "exited" ]
+        then
+          REASON="stopped"
+        else
+          REASON="unhealthy"
+        fi
+
+        echo "$DATE Container $CONTAINER_NAME (${CONTAINER_SHORT_ID}) found to be ${REASON} - Restarting container now with ${TIMEOUT}s timeout"
         if ! restart_container "$CONTAINER_ID" "$TIMEOUT"
         then
           echo "$DATE Restarting container $CONTAINER_SHORT_ID failed" >&2
-          notify_webhook "Container ${CONTAINER_NAME:1} (${CONTAINER_SHORT_ID}) found to be unhealthy. Failed to restart the container!" &
+          notify_webhook "Container ${CONTAINER_NAME:1} (${CONTAINER_SHORT_ID}) found to be ${REASON}. Failed to restart the container!" &
         else
-          notify_webhook "Container ${CONTAINER_NAME:1} (${CONTAINER_SHORT_ID}) found to be unhealthy. Successfully restarted the container!" &
+          notify_webhook "Container ${CONTAINER_NAME:1} (${CONTAINER_SHORT_ID}) found to be ${REASON}. Successfully restarted the container!" &
         fi
         notify_post_restart_script "$CONTAINER_NAME" "$CONTAINER_SHORT_ID" "$CONTAINER_STATE" "$TIMEOUT" &
       fi
