@@ -2,11 +2,11 @@ name: build
 
 on:
   workflow_dispatch:
-#  push:
+  push:
 #    branches:
 #      - main
-#    tags:
-#      - '*'
+    tags:
+      - '*'
 #  schedule:
 #    - cron: '0 0 * * *'
 
