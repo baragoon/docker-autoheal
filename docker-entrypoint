@@ -71,7 +71,10 @@ get_container_info() {
   then
     exited_url="${HTTP_ENDPOINT}/containers/json?all=1&filters=\{\"status\":\[\"exited\"\]${label_filter}\}"
     # Merge unhealthy and exited lists and dedupe by container id.
-    printf '%s\n%s\n' "$(docker_curl "$unhealthy_url")" "$(docker_curl "$exited_url")" | jq -s 'add | unique_by(.Id)'
+    {
+      docker_curl "$unhealthy_url"
+      docker_curl "$exited_url"
+    } | jq -s 'add | unique_by(.Id)'
   else
     docker_curl "$unhealthy_url"
   fi

@@ -117,7 +117,7 @@ services:
 - `AUTOHEAL_INTERVAL=5`: Check every 5 seconds.
 - `AUTOHEAL_START_PERIOD=0`: Wait 0 seconds before first health check.
 - `AUTOHEAL_DEFAULT_STOP_TIMEOUT=10`: Docker waits max 10 seconds (the Docker default) for a container to stop before killing during restarts (container overridable via label, see above).
-- `AUTOHEAL_ONLY_MONITOR_RUNNING=false`: All containers monitored by default. Unhealthy containers are restarted, and stopped containers are also restarted (started again). Set this to `true` to only monitor running containers, which ignores paused and stopped containers.
+- `AUTOHEAL_ONLY_MONITOR_RUNNING=false`: By default, autoheal monitors unhealthy running containers and also restarts stopped containers in the `exited` state (starts them again). Set this to `true` to only monitor running containers.
 - `DOCKER_SOCK=/var/run/docker.sock`: Unix socket for curl requests to Docker API.
 - `CURL_TIMEOUT=30`: `--max-time` seconds for curl requests to Docker API.
 - `WEBHOOK_URL=""`: Post message to the webhook if a container was restarted (or restart failed).
