@@ -9,7 +9,7 @@ This container is a stand-in till there is native support for [`--exit-on-unheal
 - [`latest` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/main/Dockerfile)
 - [`1.2.2` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.2/Dockerfile)
 
-![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls") [![Docker layer breakdown](https://images.microbadger.com/badges/image/baragoon/autoheal.svg)](http://microbadger.com/images/baragoon/autoheal "Docker layer breakdown")
+![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls")
 
 ## How to use
 
