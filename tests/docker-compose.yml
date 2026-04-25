@@ -17,6 +17,15 @@ services:
       start_period: 5s
     command: tail -f /dev/null
 
+  should-keep-restarting-stopped:
+    # this container should be restarted by autoheal because it is stopped and has the autoheal label
+    image: alpine
+    network_mode: none
+    restart: "no"
+    labels:
+      - "$AUTOHEAL_CONTAINER_LABEL=true"
+    command: sh -c "exit 1"
+
   shouldnt-restart-healthy:
     # this container shouldn't be restarted by autoheal because its healthy
     image: alpine
@@ -44,6 +53,13 @@ services:
       retries: 1
       start_period: 5s
     command: tail -f /dev/null
+
+  shouldnt-restart-stopped-no-label:
+    # this container shouldn't be restarted by autoheal because it is stopped but missing the autoheal label
+    image: alpine
+    network_mode: none
+    restart: "no"
+    command: sh -c "exit 1"
 
   autoheal:
     build:
