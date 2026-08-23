@@ -8,7 +8,7 @@ This container is a stand-in till there is native support for [`--exit-on-unheal
 ## Supported tags and Dockerfile links
 
 - [`latest` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/main/Dockerfile)
-- [`1.2.3` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.3/Dockerfile)
+- [`1.2.4` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.4/Dockerfile)
 
 ![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls")
 
