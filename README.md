@@ -8,7 +8,7 @@ This container is a stand-in till there is native support for [`--exit-on-unheal
 ## Supported tags and Dockerfile links
 
 - [`latest` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/main/Dockerfile)
-- [`1.2.4` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.4/Dockerfile)
+- [`1.2.6` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.6/Dockerfile)
 
 ![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls")
 
@@ -99,7 +99,7 @@ services:
       replicas: 1
     environment:
       AUTOHEAL_CONTAINER_LABEL: autoheal-app
-    image: baragoon/autoheal:1.2.4
+    image: baragoon/autoheal:1.2.6
     network_mode: none
     restart: always
     volumes:
