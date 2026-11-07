@@ -24,7 +24,7 @@ docker run -d \
     --restart=always \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    baragoon/autoheal
+    baragoon/autoheal:1.2.5
 ```
 
 #### TCP socket
@@ -36,7 +36,7 @@ docker run -d \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -e DOCKER_SOCK=tcp://$HOST:$PORT \
     -v /path/to/certs/:/certs/:ro \
-    baragoon/autoheal
+    baragoon/autoheal:1.2.5
 ```
 
 #### TCP with mTLS (HTTPS)
@@ -53,7 +53,7 @@ docker run -d \
     -e DOCKER_SOCK=tcps://$HOST:2376 \
     -e DOCKER_TLS_VERIFY=1 \
     -v /path/to/certs/:/certs/:ro \
-    baragoon/autoheal
+    baragoon/autoheal:1.2.5
 ```
 
 The certificates and keys need these names and resides under /certs inside the container:

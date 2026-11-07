@@ -8,7 +8,7 @@
       "matchStrings": [
         "`(?<currentValue>\\d+\\.\\d+\\.\\d+)` \\(\\*Dockerfile\\*\\)",
         "github\\.com/baragoon/docker-autoheal/blob/(?<currentValue>\\d+\\.\\d+\\.\\d+)/Dockerfile",
-        "image: baragoon/autoheal:(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+        "baragoon/autoheal:(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "baragoon/autoheal",
