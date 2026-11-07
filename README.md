@@ -99,7 +99,7 @@ services:
       replicas: 1
     environment:
       AUTOHEAL_CONTAINER_LABEL: autoheal-app
-    image: baragoon/autoheal:latest
+    image: baragoon/autoheal:1.2.4
     network_mode: none
     restart: always
     volumes:

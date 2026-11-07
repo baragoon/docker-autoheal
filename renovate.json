@@ -1,8 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "assignees": ["baragoon"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^README\\.md$/"],
+      "matchStrings": [
+        "`(?<currentValue>\\d+\\.\\d+\\.\\d+)` \\(\\*Dockerfile\\*\\)",
+        "github\\.com/baragoon/docker-autoheal/blob/(?<currentValue>\\d+\\.\\d+\\.\\d+)/Dockerfile",
+        "image: baragoon/autoheal:(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "baragoon/autoheal",
+      "versioningTemplate": "semver"
+    }
+  ],
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigests"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["baragoon/autoheal"],
+      "automerge": true,
+      "automergeType": "branch",
+      "ignoreTests": true
+    }
   ]
 }
