@@ -8,7 +8,7 @@ This container is a stand-in till there is native support for [`--exit-on-unheal
 ## Supported tags and Dockerfile links
 
 - [`latest` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/main/Dockerfile)
-- [`1.2.6` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.6/Dockerfile)
+- [`1.2.7` (*Dockerfile*)](https://github.com/baragoon/docker-autoheal/blob/1.2.7/Dockerfile)
 
 ![Total docker pulls](https://img.shields.io/docker/pulls/baragoon/autoheal "Total docker pulls")
 
@@ -24,7 +24,7 @@ docker run -d \
     --restart=always \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    baragoon/autoheal:1.2.6
+    baragoon/autoheal:1.2.7
 ```
 
 #### TCP socket
@@ -36,7 +36,7 @@ docker run -d \
     -e AUTOHEAL_CONTAINER_LABEL=all \
     -e DOCKER_SOCK=tcp://$HOST:$PORT \
     -v /path/to/certs/:/certs/:ro \
-    baragoon/autoheal:1.2.6
+    baragoon/autoheal:1.2.7
 ```
 
 #### TCP with mTLS (HTTPS)
@@ -53,7 +53,7 @@ docker run -d \
     -e DOCKER_SOCK=tcps://$HOST:2376 \
     -e DOCKER_TLS_VERIFY=1 \
     -v /path/to/certs/:/certs/:ro \
-    baragoon/autoheal:1.2.6
+    baragoon/autoheal:1.2.7
 ```
 
 The certificates and keys need these names and resides under /certs inside the container:
@@ -99,7 +99,7 @@ services:
       replicas: 1
     environment:
       AUTOHEAL_CONTAINER_LABEL: autoheal-app
-    image: baragoon/autoheal:1.2.6
+    image: baragoon/autoheal:1.2.7
     network_mode: none
     restart: always
     volumes:
