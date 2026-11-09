@@ -23,6 +23,7 @@
       "matchManagers": ["custom.regex"],
       "matchPackageNames": ["baragoon/autoheal"],
       "automerge": true,
+      "pinDigests": false,
       "automergeType": "branch",
       "ignoreTests": true
     }
