@@ -16,7 +16,8 @@
     }
   ],
   "extends": [
-    "config:best-practices"
+    "config:best-practices",
+    ":semanticCommits"
   ],
   "packageRules": [
     {
