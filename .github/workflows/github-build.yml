@@ -1,6 +1,13 @@
 name: build
 
 on:
+  workflow_call:
+    inputs:
+      tag:
+        description: "Tag to build and publish for a release"
+        required: false
+        type: string
+        default: ""
   workflow_dispatch:
   push:
     tags:
